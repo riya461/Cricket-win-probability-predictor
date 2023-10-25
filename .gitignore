@@ -1,2 +1,2 @@
-frontend/.gitignore
 .gitignore
+model/cricketpred.pkl
