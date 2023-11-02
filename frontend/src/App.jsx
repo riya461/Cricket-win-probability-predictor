@@ -80,8 +80,7 @@ function App() {
     } else if (wickets < 0 || wickets > 9) {
       setError("Invalid wickets");
       return;
-    }
-    else{
+    } else {
       setError("");
     }
 
@@ -93,12 +92,12 @@ function App() {
 
     const data = {
       Venue: selectedVenue,
-      batting_team: battingTeam,
-      bowling_team: bowlingTeam,
+      BattingTeam: battingTeam,
+      BowlingTeam: bowlingTeam,
       target: target,
-      runsreq: runsreq,
-      ballsleft: ballsleft,
-      wicketsLeft: wicketsLeft,
+      runs_req: runsreq,
+      balls_left: ballsleft,
+      wickets_left: wicketsLeft,
       crr: crr,
       rrr: rrr,
     };
@@ -106,11 +105,10 @@ function App() {
     fetch("/predict", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
       .then((data) => {
         setBattingProb(data.bat);
         setBowlingProb(data.bowl);
