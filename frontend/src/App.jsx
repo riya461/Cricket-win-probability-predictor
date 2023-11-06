@@ -102,7 +102,7 @@ function App() {
       rrr: rrr,
     };
 
-    fetch("/predict", {
+    fetch("http://127.0.0.1:5000/predict", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -110,6 +110,7 @@ function App() {
       body: JSON.stringify(data),
     })
       .then((data) => {
+        console.log("Success:", data);
         setBattingProb(data.bat);
         setBowlingProb(data.bowl);
         setPrediction(true);
@@ -123,73 +124,76 @@ function App() {
     <div className="App">
       <h1>IPL Win Predictor</h1>
       <div className="container-out">
-        <div className="container-in">
-          <label>Batting Team</label>
-          <select
-            value={battingTeam}
-            onChange={(e) => setBattingTeam(e.target.value)}
-          >
-            <option value="">Select Team</option>
-            {teams.map((team) => (
-              <option key={team} value={team}>
-                {team}
-              </option>
-            ))}
-          </select>
-          <label>First Innings</label>
-          <input
-            type="number"
-            onChange={(e) => setTarget(parseInt(e.target.value) + 1)}
-          />
-          <label>Wickets</label>
-          <input type="number" />
-          <label>Venue</label>
-          <select
-            value={selectedVenue}
-            onChange={(e) => setSelectedVenue(e.target.value)}
-          >
-            <option value="">Select Venue</option>
-            {cities.map((Venue) => (
-              <option key={Venue} value={Venue}>
-                {Venue}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="container-in">
-          <label>Bowling Team</label>
-          <select
-            value={bowlingTeam}
-            onChange={(e) => setBowlingTeam(e.target.value)}
-          >
-            <option value="">Select Team</option>
-            {teams.map((team) => (
-              <option key={team} value={team}>
-                {team}
-              </option>
-            ))}
-          </select>
-          <label>Second Innings</label>
-          <input
-            type="number"
-            value={score}
-            onChange={(e) => setScore(parseInt(e.target.value))}
-          />
-          <label>Wickets</label>
-          <input
-            type="number"
-            value={wickets}
-            onChange={(e) => setWickets(parseInt(e.target.value))}
-          />
-          <label>Overs completed</label>
-          <input
-            type="number"
-            value={overs}
-            onChange={(e) => setOvers(parseInt(e.target.value))}
-          />
-        </div>
+        {/* <form action="/predict" method="post"> */}
+          <div className="container-in">
+            <label>Batting Team</label>
+            <select
+              value={battingTeam}
+              onChange={(e) => setBattingTeam(e.target.value)}
+            >
+              <option value="">Select Team</option>
+              {teams.map((team) => (
+                <option key={team} value={team}>
+                  {team}
+                </option>
+              ))}
+            </select>
+            <label>First Innings</label>
+            <input
+              type="number"
+              onChange={(e) => setTarget(parseInt(e.target.value) + 1)}
+            />
+            <label>Wickets</label>
+            <input type="number" />
+            <label>Venue</label>
+            <select
+              value={selectedVenue}
+              onChange={(e) => setSelectedVenue(e.target.value)}
+            >
+              <option value="">Select Venue</option>
+              {cities.map((Venue) => (
+                <option key={Venue} value={Venue}>
+                  {Venue}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="container-in">
+            <label>Bowling Team</label>
+            <select
+              value={bowlingTeam}
+              onChange={(e) => setBowlingTeam(e.target.value)}
+            >
+              <option value="">Select Team</option>
+              {teams.map((team) => (
+                <option key={team} value={team}>
+                  {team}
+                </option>
+              ))}
+            </select>
+            <label>Second Innings</label>
+            <input
+              type="number"
+              value={score}
+              onChange={(e) => setScore(parseInt(e.target.value))}
+            />
+            <label>Wickets</label>
+            <input
+              type="number"
+              value={wickets}
+              onChange={(e) => setWickets(parseInt(e.target.value))}
+            />
+            <label>Overs completed</label>
+            <input
+              type="number"
+              value={overs}
+              onChange={(e) => setOvers(parseInt(e.target.value))}
+            />
+          </div>
+        {/* </form> */}
       </div>
-      <button onClick={predictProbability}>Predict Probability</button>
+      <button type="submit" onClick={predictProbability}>Predict Probability</button>
+
       {error && <h3 className="error">{error}</h3>}
       {prediction && (
         <>
