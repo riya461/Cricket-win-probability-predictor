@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -110,11 +110,8 @@ function App() {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json()) // Convert the response to JSON
+      .then((res) => res.json())
       .then((data) => {
-        console.log("Success:", data);
-        console.log(data.bat);
-        console.log(data.bowl);
         setBattingProb(data.bat);
         setBowlingProb(data.bowl);
         setPrediction(true);
@@ -125,7 +122,6 @@ function App() {
     <div className="App">
       <h1>IPL Win Predictor</h1>
       <div className="container-out">
-        {/* <form action="/predict" method="post"> */}
         <div className="container-in">
           <label>Batting Team</label>
           <select
@@ -191,7 +187,6 @@ function App() {
             onChange={(e) => setOvers(parseInt(e.target.value))}
           />
         </div>
-        {/* </form> */}
       </div>
       <button type="submit" onClick={predictProbability}>
         Predict Probability

@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 model = joblib.load('cricketpred.pkl')
 
-@app.route('/predict', methods=['POST', 'GET'])
+@app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     df = pd.DataFrame(data, index=[0])
